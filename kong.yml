@@ -1,0 +1,54 @@
+
+_format_version: "2.1"
+
+_transform: true
+
+########## Services ##########
+
+services:
+- name: example-service
+  url: https://www.mit.edu/~ecprice/wordlist.10000
+  tags:
+  - example
+  routes:
+  - name: example-route
+    paths:
+    - /wordlist
+
+- name: data-server
+  url: https://develop-s7lqhxt2za-uc.a.run.app
+  tags:
+  - data-server
+  routes:
+  - name: data-server-route
+    paths:
+    - /data-server
+    methods:
+    - POST
+    strip_path: true
+
+- name: context-ranker
+  url: https://context-ranker-s7lqhxt2za-uc.a.run.app
+  tags:
+  - context-ranker
+  routes:
+  - name: context-ranker-route
+    paths:
+    - /context-ranker
+    methods:
+    - POST
+    strip_path: true
+
+########## Plugins ##########
+
+plugins:
+- name: prometheus
+  service: data-server
+  # config:
+
+# - name: jwt
+#   enabled: yes
+#   service: data-server
+#   config: 
+#     header_names: ["Authorization"]
+#     secret_is_base64: false
