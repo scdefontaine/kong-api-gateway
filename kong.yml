@@ -6,44 +6,29 @@ _transform: true
 ########## Services ##########
 
 services:
-- name: example-service
+- name: wordlist-service
   url: https://www.mit.edu/~ecprice/wordlist.10000
   tags:
-  - example
+  - wordlist-service
   routes:
-  - name: example-route
+  - name: wordlist-route
     paths:
     - /wordlist
 
-- name: data-server
-  url: https://develop-s7lqhxt2za-uc.a.run.app
+- name: coincap-api
+  url: https://api.coincap.io/v2/assets
   tags:
-  - data-server
+  - coincap
   routes:
-  - name: data-server-route
+  - name: random-jokes-route
     paths:
-    - /data-server
-    methods:
-    - POST
-    strip_path: true
-
-- name: context-ranker
-  url: https://context-ranker-s7lqhxt2za-uc.a.run.app
-  tags:
-  - context-ranker
-  routes:
-  - name: context-ranker-route
-    paths:
-    - /context-ranker
-    methods:
-    - POST
-    strip_path: true
+    - /coincap
 
 ########## Plugins ##########
 
-plugins:
-- name: prometheus
-  service: data-server
+# plugins:
+# - name: prometheus
+#   service: data-server
   # config:
 
 # - name: jwt
